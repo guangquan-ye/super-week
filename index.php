@@ -1,6 +1,6 @@
 <?php
 
-require './vendor/autoload.php';
+require_once './vendor/autoload.php';
 
 $router = new AltoRouter();
 
@@ -10,6 +10,13 @@ $router->map('GET', '/', function()  {
     require_once 'home.php';
 }, 'home' );
 
+$router->map('GET', '/users', function(){
+    echo "<h1>Bievenue sur la tab user</h1>" ;
+}, 'users');
+
+$router->map('GET', '/users/[i:id]', function($id){
+    echo "<h1> Bienvenudos user $id</h1>";
+}, 'users/id');
 
 $match = $router->match();
 
