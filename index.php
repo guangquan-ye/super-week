@@ -11,7 +11,7 @@ $router->map('GET', '/', function()  {
 }, 'home' );
 
 $router->map('GET', '/users', function(){
-    echo "<h1>Bievenue sur la tab user</h1>" ;
+    echo "<h1>Bievenue sur la tab users</h1>";
 }, 'users');
 
 $router->map('GET', '/users/[i:id]', function($id){
