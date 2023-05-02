@@ -15,8 +15,7 @@ Class UserController{
 
     public function findAll()
     {
-       $users = $this->user->selectAll();
-        echo $users;
+        return $this->user->selectAll();
     }
 }
 
