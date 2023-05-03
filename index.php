@@ -32,6 +32,17 @@ $router->map('POST', '/users/register', function(){
     }
 }, 'usersregister');
 
+$router->map('GET', '/users/login', function(){
+    $controller = new UserController();
+    $controller->logFormDisplay();
+}, 'logFormDisplay');
+
+$router->map('POST', '/users/login' , function(){
+    if(isset($_POST["logBtn"])){
+    $controller = new UserController();
+    $controller->connect($_POST["logEmail"], $_POST["logPwd"]);
+    }
+}, 'userslogin');
 $router->map('GET', '/users/[i:id]', function($id){
     echo "<h1> Bienvenudos user $id</h1>";
 }, 'users/id');
