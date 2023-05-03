@@ -20,24 +20,24 @@ $router->map('GET', '/users', function(){
     echo $users;  
 }, 'users');
 
-$router->map('GET', '/users/register', function(){
+$router->map('GET', '/register', function(){
     $controller = new UserController();
     $controller->regFormDisplay();
 }, 'regFormDisplay');
 
-$router->map('POST', '/users/register', function(){
+$router->map('POST', '/register', function(){
     if(isset($_POST["regBtn"])){
         $controller = new UserController();
         $controller->createUsers($_POST["regEmail"], $_POST["regPwd"], $_POST["regFirstname"], $_POST["regLastname"], $_POST["regPwdConf"]);
     }
 }, 'usersregister');
 
-$router->map('GET', '/users/login', function(){
+$router->map('GET', '/login', function(){
     $controller = new UserController();
     $controller->logFormDisplay();
 }, 'logFormDisplay');
 
-$router->map('POST', '/users/login' , function(){
+$router->map('POST', '/login' , function(){
     if(isset($_POST["logBtn"])){
     $controller = new UserController();
     $controller->connect($_POST["logEmail"], $_POST["logPwd"]);
