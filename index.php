@@ -44,7 +44,9 @@ $router->map('POST', '/login' , function(){
     }
 }, 'userslogin');
 $router->map('GET', '/users/[i:id]', function($id){
-    echo "<h1> Bienvenudos user $id</h1>";
+    $controller = new UserController();
+    $controller->findOne($id);
+    var_dump($controller->findOne($id));
 }, 'users/id');
 
 $match = $router->match();
