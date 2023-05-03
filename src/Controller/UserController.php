@@ -27,13 +27,16 @@ Class UserController{
     }
     public function findAll()
     {
-        
         return $this->user->selectAll();
     }
-
-    public function findOne($email)
+    public function findOne($id)
     {
-        return $this->user->selectOne($email);
+        return $this->user->selectOne($id);
+    }
+
+    public function ifExist($email)
+    {
+        return $this->user->ifEmailExist($email);
     }
 
     public function regFormDisplay(){
@@ -48,7 +51,7 @@ Class UserController{
 
     public function connect($email, $password){
 
-      $result = $this->findOne($email);
+      $result = $this->ifExist($email);
        if($result["password"] == $password){
         $_SESSION["user"] = [
             "id" => $result["id"],

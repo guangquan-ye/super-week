@@ -21,8 +21,19 @@ Class UserModel{
         
         return json_encode($result);
     }
+
+    public function selectOne($id)
+    {
+        $select ="SELECT * FROM user WHERE id = :id";
+        $prepare = DbConnexion::getDb()->prepare($select);
+        $prepare->execute([
+            "id" => $id
+        ]);
+        $result = $prepare->fetch(\PDO::FETCH_ASSOC);
+        return json_encode($result);
+    }
     
-    public function selectOne($email)
+    public function ifEmailExist($email)
     {
         $select ="SELECT * FROM user WHERE email = :email";
         $prepare = DbConnexion::getDb()->prepare($select);
@@ -32,6 +43,7 @@ Class UserModel{
         $result = $prepare->fetch(\PDO::FETCH_ASSOC);
         return $result;
     }
+
     public function verifyExist($email)
     {
         $select = "SELECT COUNT(email) FROM user WHERE email = :email";
