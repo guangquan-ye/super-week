@@ -21,5 +21,27 @@ Class BookModel{
         ]);
     }
 
+    public function selectAllBooks()
+    {
+        $select ="SELECT * FROM book";
+        $prepare = DbConnexion::getDb()->prepare($select);
+        $prepare->execute();
+        $result = $prepare->fetchAll(\PDO::FETCH_ASSOC);
+        
+       echo json_encode($result);
+
+    }
+
+    public function selectOneBook($id){
+
+        $select ="SELECT * FROM book WHERE id = :id";
+        $prepare = DbConnexion::getDb()->prepare($select);
+        $prepare->execute([
+            "id" => $id
+        ]);
+        $result = $prepare->fetchAll(\PDO::FETCH_ASSOC);
+        
+       echo json_encode($result);
+    }
 }
 ?>

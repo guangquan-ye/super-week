@@ -17,8 +17,8 @@ $router->map('GET', '/', function(){
 
 $router->map('GET', '/users', function(){
     $user = new UserController();
-    $users = $user -> findAll();
-    echo $users;  
+    $users = $user->findAll();
+    echo $users; 
 }, 'users');
 
 $router->map('GET', '/register', function(){
@@ -46,8 +46,8 @@ $router->map('POST', '/login' , function(){
 }, 'userslogin');
 $router->map('GET', '/users/[i:id]', function($id){
     $user = new UserController();
-    $user->findOne($id);
-    var_dump($user->findOne($id));
+    $users = $user->findOne($id);
+    echo $users;
 }, 'users/id');
 
 $router->map('GET', '/books/add', function(){
@@ -63,6 +63,23 @@ $router->map('POST', '/books/add', function(){
         $book->addBook($_POST["addBookTitle"], $_POST["addBookContent"], $_SESSION["user"]["id"]);
     }
 },'addBook');
+
+$router->map('GET', '/books', function(){
+    $book = new BookController();
+    $books = $book->getBooks();
+    echo $books;
+}, 'getBooks');
+
+$router->map('GET', '/books/[i:id]', function($id){
+    $book = new BookController();
+    $oneBook = $book->getOneBook($id);
+
+    echo $oneBook;
+}, 'getOneBook');
+
+$router->map('GET', '/deco', function(){
+    session_destroy();
+}, 'deconnexion');
 
 $match = $router->match();
 
