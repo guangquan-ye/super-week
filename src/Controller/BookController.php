@@ -20,5 +20,15 @@ Class BookController
 
         $this->book->insertBook($title, $content, $id_user);
     }
+
+    public function getBooks(){
+
+        return $this->book->selectAllbooks();  
+    }
+
+    public function getOneBook($id){
+
+        return $this->book->selectOneBook($id);
+    }
 }
 ?>
