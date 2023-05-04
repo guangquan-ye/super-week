@@ -8,11 +8,9 @@ $router = new AltoRouter();
 
 $router->setBasePath('/super-week');
 
-
-
-$router->map('GET', '/', function()  {
+$router->map('GET', '/', function(){
     require_once 'home.php';
-}, 'home' );
+}, 'home');
 
 $router->map('GET', '/users', function(){
     $controller = new UserController();
