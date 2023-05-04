@@ -2,7 +2,10 @@
 
 require_once './vendor/autoload.php';
 
+use App\Controller\BookController;
 use App\Controller\UserController;
+
+session_start();
 
 $router = new AltoRouter();
 
@@ -13,39 +16,53 @@ $router->map('GET', '/', function(){
 }, 'home');
 
 $router->map('GET', '/users', function(){
-    $controller = new UserController();
-    $users = $controller -> findAll();
+    $user = new UserController();
+    $users = $user -> findAll();
     echo $users;  
 }, 'users');
 
 $router->map('GET', '/register', function(){
-    $controller = new UserController();
-    $controller->regFormDisplay();
+    $user = new UserController();
+    $user->regFormDisplay();
 }, 'regFormDisplay');
 
 $router->map('POST', '/register', function(){
     if(isset($_POST["regBtn"])){
-        $controller = new UserController();
-        $controller->createUsers($_POST["regEmail"], $_POST["regPwd"], $_POST["regFirstname"], $_POST["regLastname"], $_POST["regPwdConf"]);
+        $user = new UserController();
+        $user->createUsers($_POST["regEmail"], $_POST["regPwd"], $_POST["regFirstname"], $_POST["regLastname"], $_POST["regPwdConf"]);
     }
 }, 'usersregister');
 
 $router->map('GET', '/login', function(){
-    $controller = new UserController();
-    $controller->logFormDisplay();
+    $user = new UserController();
+    $user->logFormDisplay();
 }, 'logFormDisplay');
 
 $router->map('POST', '/login' , function(){
     if(isset($_POST["logBtn"])){
-    $controller = new UserController();
-    $controller->connect($_POST["logEmail"], $_POST["logPwd"]);
+    $user = new UserController();
+    $user->connect($_POST["logEmail"], $_POST["logPwd"]);
     }
 }, 'userslogin');
 $router->map('GET', '/users/[i:id]', function($id){
-    $controller = new UserController();
-    $controller->findOne($id);
-    var_dump($controller->findOne($id));
+    $user = new UserController();
+    $user->findOne($id);
+    var_dump($user->findOne($id));
 }, 'users/id');
+
+$router->map('GET', '/books/add', function(){
+    var_dump($_SESSION["user"]);
+    $book = new BookController();
+    $book->addBookFormDisplay();
+}, 'addBookFormDisplay');
+
+$router->map('POST', '/books/add', function(){
+    
+    if(isset($_POST["addBookBtn"])){
+        $book = new BookController();
+        $book->addBook($_POST["addBookTitle"], $_POST["addBookContent"], $_SESSION["user"]["id"]);
+    }
+},'addBook');
 
 $match = $router->match();
 
