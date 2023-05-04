@@ -39,7 +39,7 @@ Class BookModel{
         $prepare->execute([
             "id" => $id
         ]);
-        $result = $prepare->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $prepare->fetch(\PDO::FETCH_ASSOC);
         
        echo json_encode($result);
     }

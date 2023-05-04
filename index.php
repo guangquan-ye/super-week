@@ -73,7 +73,6 @@ $router->map('GET', '/books', function(){
 $router->map('GET', '/books/[i:id]', function($id){
     $book = new BookController();
     $oneBook = $book->getOneBook($id);
-
     echo $oneBook;
 }, 'getOneBook');
 
